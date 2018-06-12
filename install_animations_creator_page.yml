@@ -25,3 +25,20 @@
         - "boto3"
         - "pytest"
         - "flask"
+    - name: "Synchronize repository"
+      git:
+        repo: "https://github.com/luki6021/GIF_generator"
+        dest: ~/animation-creator
+    - name: "System variable PYTHONPATH"
+      lineinfile:
+        path: ~/.bashrc
+        line: "export PYTHONPATH=/home/ec2-user/animation-creator"
+    - name: "System variable APP_BUKET_NAME"
+      lineinfile:
+        path: ~/.bashrc
+        line: "export APP_BUCKET_NAME=TEST"
+    - name: "Set commit author"
+      raw: "git config --global user.{{ item.key }} '{{ item.value }}'"
+      with_items:
+        - {key: "name", value: "{{ git_username }}"}
+        - {key: "email", value: "{{ git_email }}"}
