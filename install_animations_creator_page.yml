@@ -1,0 +1,27 @@
+- hosts: web_nodes
+  tasks:
+    - name: "Install common dependencies"
+      yum:
+        name: "{{ item }}"
+        state: present
+      become: yes
+      with_items:
+        - "git"
+        - "mc"
+    - name: "Install python environment"
+      yum:
+        name: "{{ item }}"
+        state: present
+      become: yes
+      with_items:
+        - "python36"
+        - "python36-pip"
+    - name: "Install python dependencies"
+      pip:
+        name: "{{ item }}"
+        executable: pip-3.6
+      become: yes
+      with_items:
+        - "boto3"
+        - "pytest"
+        - "flask"
