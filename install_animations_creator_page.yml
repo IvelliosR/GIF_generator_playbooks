@@ -27,7 +27,7 @@
         - "flask"
     - name: "Synchronize repository"
       git:
-        repo: "https://github.com/luki6021/GIF_generator"
+        repo: "https://github.com/luki6021/GIF_generator_uploading"
         dest: ~/animation-creator
     - name: "System variables"
       lineinfile:
